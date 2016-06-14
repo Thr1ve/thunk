@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib",
+    "build": "rimraf lib && babel src -d lib",
     "prepublish": "npm run build"
   },
   "author": "Thr1ve",
@@ -23,7 +23,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rimraf": "^2.5.2"
+  },
   "keywords": [],
   "repository": {
     "type": "git",
