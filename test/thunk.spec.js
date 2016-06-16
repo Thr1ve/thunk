@@ -1,7 +1,7 @@
 import test from 'ava';
 import { spy, useFakeTimers, match } from 'sinon';
 
-import thunk from '../src/thunk';
+import thunk from '../src/index';
 
 test.beforeEach(t => {
   t.context.clock = useFakeTimers();
