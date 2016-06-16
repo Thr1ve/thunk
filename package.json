@@ -41,5 +41,5 @@
     "babel": "inherit"
   },
   "homepage": "https://github.com/Thr1ve/thunk#readme",
-  "description": ""
+  "description": "A simple, chain-able utility function that wraps setTimeout"
 }
