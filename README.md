@@ -8,6 +8,7 @@
 `thunk(ms, fn)`
  - `ms`: The number of milliseconds to wait before invoking `fn`
  - `fn`: A function to execute
+   - `stop`: A function available as a param within `fn` that, when invoked, will cancel all thunks in the chain.
 
 ```javascript
 import thunk from '@thr1ve/thunk';
@@ -32,6 +33,32 @@ thunk(200, beep)
 // logs "beep" to the console after 200 milliseconds
 // logs "boop" to the console 100 milliseconds after "beep"
 // logs "bzzt" to the console 300 milliseconds after "boop"
+```
+
+##### stopping:
+The callback passed to `thunk` will also have a `stop` function available as the first parameter. Invoking `stop` will cancel the entire `thunk` chain.
+
+```javascript
+import thunk from '@thr1ve/thunk';
+
+const beep = () => console.log('beep');
+const boop = () => console.log('boop');
+const bzzt = () => console.log('bzzt');
+
+const cancel = stop => {
+  if (true) {
+    stop();
+  }
+}
+
+thunk(200, beep)
+  .thunk(100, boop)
+  .thunk(100, cancel)
+  .thunk(300, bzzt);
+// logs "beep" to the console after 200 milliseconds
+// logs "boop" to the console 100 milliseconds after "beep"
+// after another 100 milliseconds, the `cancel` function will invoke `stop`, halting the entire thunk chain
+// the function `bzzt` will never be invoked, and "bzzt" will never be logged to the console
 ```
 
 ##### Also available: `thunkify`
